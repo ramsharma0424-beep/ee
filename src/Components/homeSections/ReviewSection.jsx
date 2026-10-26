@@ -177,12 +177,12 @@ const ReviewSection = () => {
                 className="relative h-[400px] w-[300px] md:w-[350px] lg:w-[400px] bg-[#0c0c0c] overflow-hidden border border-white/10 hover:border-white/25 transition-colors duration-500 shrink-0 p-6 flex flex-col gap-4"
               >
                 <div>
-                  <p className="text-white text-base md:text-lg font-light lowercase tracking-wide">{review.name}</p>
+                  <p className="text-white text-sm font-light lowercase tracking-wide">{review.name}</p>
                   {review.company && (
                     <p className="text-zinc-500 text-[11px] tracking-[0.15em] mt-0.5">{review.company}</p>
                   )}
                 </div>
-                <p className="text-zinc-400 text-sm md:text-base leading-relaxed font-light lowercase flex-1 overflow-y-auto">
+                <p className="text-zinc-400 text-[13px] leading-relaxed font-light lowercase flex-1 overflow-y-auto">
                   "{review.quote}"
                 </p>
               </div>

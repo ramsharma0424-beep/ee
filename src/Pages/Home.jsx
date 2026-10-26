@@ -36,6 +36,7 @@ import ServicesSection from "../Components/homeSections/ServicesSection";
 import ProjectsSection from "../Components/homeSections/ProjectsSection";
 // import JournalsSection from "../Components/homeSections/JournalsSection";
 import ReviewSection from "../Components/homeSections/ReviewSection";
+import NewsletterSection from "../Components/homeSections/NewsletterSection";
 
 const Home = () => {
 
@@ -190,6 +191,7 @@ const Home = () => {
         <ProjectsSection />
         {/* <JournalsSection /> */}
         <ReviewSection />
+        <NewsletterSection />
       </div>
     </>
   );
