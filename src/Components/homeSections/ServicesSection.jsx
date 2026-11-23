@@ -154,18 +154,22 @@ import { motion, AnimatePresence } from "framer-motion";
 const ServicesSection = () => {
     // 6 Items add kar diye gaye hain
     const serviceData = [
-        { id: "01", title: "architectural Design", img: "/architectural.webp", desc: "We provide comprehensive architectural design services from concept to execution-ready documentation. Our process combines creativity with technical precision to deliver spaces that are " },
-        { id: "02", title: "interior Design", img: "/interior.webp", desc: "Our interior design focuses on creating curated living environments that feel calm, intuitive, and purposeful. Through thoughtful spatial planning, material selection, and natural light, " },
-        { id: "03", title: "landscape Design", img: "/LANDSCAPE/1.webp", desc: "We design landscapes that thoughtfully connect architecture with nature. By considering sunlight, movement, greenery, and views, we create outdoor spaces that feel harmonious, inviting, " },
-        { id: "04", title: "design to build execution", img: "/design to build.webp", desc: "Our design-to-build approach ensures seamless transition from concept to on-site realization. With in-house coordination and attention to detail, we deliver spaces that reflect " },
-        { id: "05", title: "exterior design", img: "/exterior.webp", desc: "End-to-end project management and execution, ensuring every detail of the design is realized exactly as envisioned without the stress of coordinating multiple contractors." },
-        { id: "06", title: "Bespoke furniture", img: "/furniture/25.webp", desc: "Bespoke furniture design tailored specifically to your space. We craft unique pieces that perfectly match the architectural language and elevate the overall interior experience." },
+        { id: "01", title: "architectural Design", img: "/HomeImgs/disciplines/architectural.jpg", desc: "We provide comprehensive architectural design services from concept to execution-ready documentation. Our process combines creativity with technical precision to deliver spaces that are " },
+        { id: "02", title: "interior Design", img: "/HomeImgs/disciplines/interior.jpg", desc: "Our interior design focuses on creating curated living environments that feel calm, intuitive, and purposeful. Through thoughtful spatial planning, material selection, and natural light, " },
+        { id: "03", title: "landscape Design", img: "/HomeImgs/disciplines/landscape.jpg", desc: "We design landscapes that thoughtfully connect architecture with nature. By considering sunlight, movement, greenery, and views, we create outdoor spaces that feel harmonious, inviting, " },
+        { id: "04", title: "design to build execution", img: "/HomeImgs/disciplines/design-to-build.jpg", desc: "Our design-to-build approach ensures seamless transition from concept to on-site realization. With in-house coordination and attention to detail, we deliver spaces that reflect " },
+        { id: "05", title: "exterior design", img: "/HomeImgs/disciplines/exterior.jpg", desc: "End-to-end project management and execution, ensuring every detail of the design is realized exactly as envisioned without the stress of coordinating multiple contractors." },
+        { id: "06", title: "Bespoke furniture", img: "/HomeImgs/disciplines/furniture.jpg", desc: "Bespoke furniture design tailored specifically to your space. We craft unique pieces that perfectly match the architectural language and elevate the overall interior experience." },
     ];
 
     const [currentSlide, setCurrentSlide] = useState(0);
 
-    // Auto slide for mobile
+    // Auto slide for mobile only. Running it on desktop re-renders this
+    // image grid every few seconds and hitches the scroll.
     useEffect(() => {
+        const media = window.matchMedia("(max-width: 767px)");
+        if (!media.matches) return undefined;
+
         const interval = setInterval(() => {
             setCurrentSlide((prev) => (prev + 1) % serviceData.length);
         }, 5000);
@@ -177,7 +181,7 @@ const ServicesSection = () => {
     };
 
     return (
-        <section className="w-full bg-black py-10 px-4 md:px-16 lg:px-24 overflow-hidden">
+        <section className="w-full bg-black py-10 px-4 md:px-16 lg:px-24 overflow-clip">
             <div className="max-w-[1400px] mx-auto">
                 <div className="mb-12 md:px-0">
                     <h2 className="text-white text-3xl md:text-5xl font-light tracking-tighter lowercase">
@@ -208,12 +212,15 @@ const ServicesSection = () => {
                                     ${paddingClass} border-b border-white/10 md:border-none`}
                             >
                                 <div className="w-full md:w-1/2 px-4 md:px-6">
-                                    <div className="aspect-square w-full overflow-hidden bg-zinc-900 shadow-xl">
+                                    <div className="aspect-square w-full overflow-clip bg-zinc-900">
                                         <img
                                             src={item.img}
                                             alt={item.title}
                                             loading="lazy"
-                                            className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-105"
+                                            decoding="async"
+                                            width="1400"
+                                            height="1400"
+                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                                         />
                                     </div>
                                 </div>

@@ -265,7 +265,7 @@ const ProjectsSection = () => {
  };
 
  return (
- <section className="w-full bg-black py-10 px-4 md:px-16 overflow-hidden">
+ <section className="w-full bg-black py-10 px-4 md:px-16 overflow-clip">
  <div className="max-w-[1400px] mx-auto">
 
  {/* Header */}

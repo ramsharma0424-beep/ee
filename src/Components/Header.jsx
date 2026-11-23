@@ -53,15 +53,11 @@ const Header = () => {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      setIsScrolled(currentScrollY > 80);
-      if (currentScrollY < 80) {
-        setVisible(true);
-      } else if (currentScrollY > lastScrollY.current) {
-        setVisible(false);
-      } else {
-        setVisible(true);
-      }
+      const nextScrolled = currentScrollY > 80;
+      const nextVisible = currentScrollY < 80 || currentScrollY < lastScrollY.current;
       lastScrollY.current = currentScrollY;
+      setIsScrolled((prev) => (prev === nextScrolled ? prev : nextScrolled));
+      setVisible((prev) => (prev === nextVisible ? prev : nextVisible));
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);

@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const CreativeVisionSection = () => {
   return (
-    <section className="relative z-[1] w-full bg-black py-10 md:py-20 overflow-hidden font-lato">
+    <section className="relative z-[1] w-full bg-black py-10 md:py-20 overflow-clip font-lato">
       <div className="w-full mx-auto flex flex-col items-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

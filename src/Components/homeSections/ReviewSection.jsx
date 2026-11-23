@@ -100,6 +100,8 @@ const ReviewSection = () => {
 
   const [width, setWidth] = useState(0);
   const [isInteracting, setIsInteracting] = useState(false);
+  const [inView, setInView] = useState(false);
+  const sectionRef = useRef(null);
 
   const x = useMotionValue(0);
   const controls = useAnimation();
@@ -118,7 +120,21 @@ const ReviewSection = () => {
   }, []);
 
   useEffect(() => {
-    if (isInteracting || width === 0) return;
+    const node = sectionRef.current;
+    if (!node) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setInView(entry.isIntersecting);
+        if (!entry.isIntersecting) controls.stop();
+      },
+      { rootMargin: "200px 0px" }
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [controls]);
+
+  useEffect(() => {
+    if (!inView || isInteracting || width === 0) return;
 
     const interval = setInterval(() => {
       const currentX = x.get();
@@ -137,10 +153,10 @@ const ReviewSection = () => {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [isInteracting, width, controls, x]);
+  }, [inView, isInteracting, width, controls, x]);
 
   return (
-    <section className="bg-black text-white py-5 md:py-10 px-4 md:px-8 font-lato overflow-hidden lowercase">
+    <section ref={sectionRef} className="bg-black text-white py-5 md:py-10 px-4 md:px-8 font-lato overflow-clip lowercase">
       <div className="max-w-[1400px] mx-auto mb-16">
         <span className="text-7xl font-serif text-zinc-700 block -mb-8 leading-none">"</span>
         <h2 className="text-4xl md:text-5xl font-light tracking-tight lowercase">testimonials</h2>
@@ -156,12 +172,12 @@ const ReviewSection = () => {
       </div>
 
       <div className="max-w-[1400px] mx-auto relative cursor-grab active:cursor-grabbing">
-        <div ref={carouselRef} className="overflow-hidden">
+        <div ref={carouselRef} className="overflow-clip">
           <motion.div
             ref={trackRef}
             drag="x"
             dragConstraints={{ right: 0, left: -width }}
-            style={{ x }}
+            style={{ x, touchAction: "pan-y" }}
             animate={controls}
             onMouseEnter={() => setIsInteracting(true)}
             onMouseLeave={() => setIsInteracting(false)}
@@ -175,6 +191,7 @@ const ReviewSection = () => {
               <div
                 key={i}
                 className="relative h-[400px] w-[300px] md:w-[350px] lg:w-[400px] bg-[#0c0c0c] overflow-hidden border border-white/10 hover:border-white/25 transition-colors duration-500 shrink-0 p-6 flex flex-col gap-4"
+                style={{ contentVisibility: "auto", containIntrinsicSize: "400px 400px" }}
               >
                 <div>
                   <p className="text-white text-sm font-light lowercase tracking-wide">{review.name}</p>
@@ -182,7 +199,7 @@ const ReviewSection = () => {
                     <p className="text-zinc-500 text-[11px] tracking-[0.15em] mt-0.5">{review.company}</p>
                   )}
                 </div>
-                <p className="text-zinc-400 text-[13px] leading-relaxed font-light lowercase flex-1 overflow-y-auto">
+                <p className="text-zinc-400 text-[13px] leading-relaxed font-light lowercase flex-1 overflow-clip">
                   "{review.quote}"
                 </p>
               </div>

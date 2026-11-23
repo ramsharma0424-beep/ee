@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Button from "../Button";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -12,6 +12,42 @@ const titles = [
 const HeroSection = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [current, setCurrent] = useState(0);
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    let inView = false;
+    let resumeTimer = 0;
+    const sync = () => {
+      if (inView) video.play().catch(() => {});
+      else video.pause();
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        inView = entry.isIntersecting;
+        sync();
+      },
+      { threshold: 0.15 }
+    );
+    observer.observe(video);
+
+    // Decoding the hero video on the same frames as the scroll makes the page hitch.
+    const onScroll = () => {
+      if (!video.paused) video.pause();
+      window.clearTimeout(resumeTimer);
+      resumeTimer = window.setTimeout(sync, 180);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", onScroll);
+      window.clearTimeout(resumeTimer);
+    };
+  }, []);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -28,14 +64,15 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="relative w-full h-[100svh] overflow-hidden">
+    <section className="relative w-full h-[100svh] overflow-clip">
       <video
+        ref={videoRef}
         className="absolute inset-0 w-full h-full object-cover"
         autoPlay
         muted
         loop
         playsInline
-        preload="auto"
+        preload="metadata"
       >
         <source src="/Home.MP4" type="video/mp4" />
       </video>

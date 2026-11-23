@@ -323,7 +323,7 @@ furniture: {
   };
 
   return (
-    <main className="bg-black min-h-screen font-lato overflow-x-hidden relative">
+    <main className="bg-black min-h-screen font-lato overflow-x-clip relative">
       <div className="max-w-[1400px] mx-auto px-6 md:px-16 lg:px-24">
 
         <div>

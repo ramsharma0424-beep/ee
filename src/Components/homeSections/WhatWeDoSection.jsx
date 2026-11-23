@@ -117,11 +117,10 @@ const WhatWeDoSection = () => {
 
  {/* Desktop Hover Content */}
  <div
- className={`hidden md:block absolute left-0 top-[90%] w-full bg-black border border-white/10 shadow-2xl transition-all duration-500 ease-out ${hoveredItem === index
- ?"opacity-100 translate-y-2 visible pointer-events-auto"
- :"opacity-0 translate-y-0 invisible pointer-events-none"
+ className={`absolute left-0 top-[90%] z-[999] w-full bg-black border border-white/10 shadow-2xl transition-all duration-500 ease-out ${hoveredItem === index
+ ?"opacity-100 translate-y-2 block pointer-events-auto"
+ :"hidden"
  }`}
- style={{ zIndex: 999 }}
  onMouseEnter={() => setHoveredItem(index)}
  >
  <div className="p-5">

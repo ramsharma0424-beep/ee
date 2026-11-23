@@ -41,7 +41,7 @@ const AboutContent = () => {
  return (
  <section
  ref={containerRef}
- className="bg-black text-white py-0 md:py-10 overflow-x-hidden"
+ className="bg-black text-white py-0 md:py-10 overflow-x-clip"
  >
  <div className="w-full">
 

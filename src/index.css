@@ -7,10 +7,7 @@
   --font-lato: "Lato", ui-sans-serif, system-ui;
 }
 
-
-/* Images GPU par render hon aur unka layout pehle se fix ho */
-img {
-  content-visibility: auto;
-  transform: translateZ(0); /* Yeh browser ko force karta hai GPU use karne ke liye */
-  backface-visibility: hidden;
+/* Stop the browser from cancelling a scroll when the next section's images settle. */
+html {
+  overflow-anchor: none;
 }

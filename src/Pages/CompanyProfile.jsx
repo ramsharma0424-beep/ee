@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 const TOTAL_PAGES = 30;
@@ -95,33 +95,34 @@ function PdfPage({ pageNum }) {
 }
 
 function CompanyProfile() {
-  const [scrollProgress, setScrollProgress] = useState(0);
-
-  const handleScroll = useCallback(() => {
-    const scrollTop = window.scrollY;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    setScrollProgress(docHeight > 0 ? (scrollTop / docHeight) * 100 : 0);
-  }, []);
+  const barRef = useRef(null);
 
   useEffect(() => {
+    const bar = barRef.current;
+    const handleScroll = () => {
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+      if (bar) bar.style.width = `${progress}%`;
+    };
     window.scrollTo({ top: 0, behavior: "instant" });
     window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [handleScroll]);
+  }, []);
 
   return (
     <div className="min-h-screen bg-black text-white" style={{ fontFamily: "Lato, sans-serif" }}>
       {/* Scroll progress bar */}
       <div
+        ref={barRef}
         style={{
           position: "fixed",
           top: 0,
           left: 0,
           height: "2px",
-          width: `${scrollProgress}%`,
+          width: "0%",
           background: "rgba(255,255,255,0.45)",
           zIndex: 9999,
-          transition: "width 0.1s linear",
           pointerEvents: "none",
         }}
       />

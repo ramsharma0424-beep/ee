@@ -2,7 +2,7 @@ import React from "react";
 
 const AboutSection = () => {
   return (
-    <section className="w-full bg-black py-10 overflow-hidden">
+    <section className="w-full bg-black py-10 overflow-clip">
       <div className="max-w-[1400px] mx-auto px-6 md:px-16 lg:px-24">
         <p className="w-full md:w-[80%] text-white/80 text-2xl md:text-3xl font-light italic mb-10 md:mb-16 tracking-wide lowercase">
           where visionary design, master craftsmanship, and thoughtful detail
