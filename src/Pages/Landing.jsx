@@ -6,7 +6,7 @@ export default function Landing() {
     <div className="landing-root">
       <nav className="nav">
         <div className="nav-logo">
-          <img src="/essentia R W.webp" alt="Essentia Logo" />
+          <img src="/black-logo.png" alt="Essentia Logo" />
         </div>
         <div className="nav-est">Est. 1999 · Gurugram, India</div>
       </nav>
@@ -155,7 +155,7 @@ export default function Landing() {
         </div>
       </div>
       <footer>
-        <img src="/essentia R W.webp" alt="Essentia Logo" className="footer-logo" />
+        <img src="/black-logo.png" alt="Essentia Logo" className="footer-logo" />
         <div className="footer-links">
           <a href="/" className="footer-link">
             Essentia Environments

@@ -23,22 +23,13 @@ const Counter = ({ value, duration = 2 }) => {
 
 // --- Fade-in Stagger Animations for Lists ---
 const listVariants = {
- hidden: { opacity: 0 },
- visible: {
- opacity: 1,
- transition: {
- staggerChildren: 0.25, 
- delayChildren: 0.2, 
- },
- },
+ hidden: { opacity: 1 },
+ visible: { opacity: 1 },
 };
 
 const itemVariants = {
- hidden: { opacity: 0 }, // Side ya up-down movement hata di hai
- visible: { 
- opacity: 1, 
- transition: { duration: 0.8, ease:"easeInOut" } 
- },
+ hidden: { opacity: 1 },
+ visible: { opacity: 1 },
 };
 
 const AboutDetails = () => {
@@ -63,7 +54,7 @@ const AboutDetails = () => {
  ];
 
  return (
- <section className="bg-black text-white py-8 md:py-10 overflow-hidden lowercase">
+ <section className="bg-black text-white py-8 md:py-10 overflow-clip lowercase">
  <div className="max-w-[1400px] mx-auto px-6 md:px-16">
  
  {/* --- 1. Vision & Mission Section --- */}
@@ -73,25 +64,17 @@ const AboutDetails = () => {
  <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start -mb-5 md:mb-10">
  {/* Vision Image - Smooth Pop Up */}
  <motion.div 
- initial={{ opacity: 0, scale: 0.85 }} 
- whileInView={{ opacity: 1, scale: 1 }}
- viewport={{ once: true, margin:"-100px" }}
- transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }} // Premium smooth curve
  className="w-full aspect-[4/4] md:aspect-[4/3] m-auto"
  >
  <img 
  src="/AboutImgs/mission.webp" 
  alt="Architectural Vision" 
- className="w-full h-full object-contain object-center opacity-80 hover:opacity-100 transition-opacity duration-1000"
+ className="w-full h-full object-contain object-center"
  />
  </motion.div>
 
  {/* Vision Text - Simple Fade In */}
  <motion.div 
- initial={{ opacity: 0 }}
- whileInView={{ opacity: 1 }}
- viewport={{ once: true, margin:"-100px" }}
- transition={{ duration: 0.8 }}
  className="md:pt-20 lg:pl-10"
  >
  <h3 className="font-lato text-3xl md:text-4xl font-light mb-6 lowercase tracking-[0.1em] text-white/90">
@@ -124,10 +107,6 @@ const AboutDetails = () => {
  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-end">
  {/* Mission Text - Simple Fade In */}
  <motion.div 
- initial={{ opacity: 0 }}
- whileInView={{ opacity: 1 }}
- viewport={{ once: true, margin:"-100px" }}
- transition={{ duration: 0.8 }}
  className="order-2 md:order-1 md:pb-20"
  >
  <h3 className="font-lato text-3xl md:text-4xl font-light mb-8 lowercase tracking-[0.1em] text-white/90">
@@ -157,16 +136,12 @@ const AboutDetails = () => {
 
  {/* Mission Image - Smooth Pop Up */}
  <motion.div 
- initial={{ opacity: 0, scale: 0.85 }}
- whileInView={{ opacity: 1, scale: 1 }}
- viewport={{ once: true, margin:"-100px" }}
- transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }} 
  className="order-1 md:order-2 w-full aspect-[4/3] m-auto"
  >
  <img 
  src="/AboutImgs/vision-wireframe.webp" 
  alt="Project Mission" 
- className="w-full h-full object-contain opacity-80 hover:opacity-100 transition-opacity duration-1000"
+ className="w-full h-full object-contain"
  />
  </motion.div>
  </div>

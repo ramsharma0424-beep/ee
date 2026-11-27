@@ -64,7 +64,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="relative w-full h-[100svh] overflow-clip">
+    <section className="on-dark relative w-full h-[100svh] overflow-clip">
       <video
         ref={videoRef}
         className="absolute inset-0 w-full h-full object-cover"

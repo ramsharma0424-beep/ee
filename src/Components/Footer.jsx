@@ -11,6 +11,7 @@ import {
   Facebook,
 } from "lucide-react"; // Pinterest yahan se hata diya gaya hai
 import { motion } from "framer-motion";
+import { useTheme } from "./ThemeContext";
 
 // Custom Pinterest SVG Component
 const PinterestIcon = ({ size = 24, className = "" }) => (
@@ -27,6 +28,7 @@ const PinterestIcon = ({ size = 24, className = "" }) => (
 );
 
 const Footer = () => {
+  const { theme } = useTheme();
   const links = [
     { name: "about us", path: "/about" },
     { name: "services", path: "/services" },
@@ -58,7 +60,7 @@ const Footer = () => {
                 to="/"
                 className="text-white text-3xl md:text-4xl font-extralight tracking-tighter hover:opacity-90 transition-opacity"
               >
-                <img src="/essentia R W.webp" alt="" className="w-40 h-7 mb-5" />
+                <img src={theme === "light" ? "/black-logo.png" : "/essentia R W.webp"} alt="" className="w-40 h-7 mb-5" />
               </Link>
             </div>
 

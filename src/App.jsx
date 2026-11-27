@@ -10,6 +10,7 @@ import SmoothScroll from "./Components/SmoothScroll";
 import GlobalLoader from "./Components/GlobalLoader";
 import NoIndexPage from "./Components/NoIndexPage";
 import ChatbotWidget from "./Components/chatBot/ChatbotWidget";
+import { ThemeProvider, useTheme } from "./Components/ThemeContext";
 
 // Lazy Loaded Pages
 const Home = lazy(() => import("./Pages/Home"));
@@ -71,12 +72,13 @@ const ScrollToTop = () => {
 // Main Content Wrapper to handle Header/Footer visibility logic
 const AppContent = () => {
   const location = useLocation();
+  const { theme } = useTheme();
   const hideChrome = location.pathname === "/landing";
 
   const canonicalUrl = `${window.location.origin}${location.pathname}`;
 
   return (
-    <div className="font-lato min-h-screen bg-black flex flex-col">
+    <div className={`${theme === "light" ? "site-light bg-white text-[#1a1a1a]" : "bg-black text-white"} font-lato min-h-screen flex flex-col`}>
       <Helmet>
         <link rel="canonical" href={canonicalUrl} />
       </Helmet>
@@ -149,12 +151,14 @@ const AppContent = () => {
 function App() {
   return (
     <HelmetProvider>
+    <ThemeProvider>
     <Router>
       <ScrollToTop />
       <SmoothScroll>
         <AppContent />
       </SmoothScroll>
     </Router>
+    </ThemeProvider>
     </HelmetProvider>
   );
 }

@@ -57,42 +57,31 @@ const FaqSection = () => {
   };
 
   return (
-    <section className="bg-black text-white py-8 overflow-hidden">
+    <section className="bg-black text-white py-8 overflow-clip">
       <div className="max-w-[1200px] mx-auto px-6 md:px-16">
 
         {/* Header Section */}
         <div className="mb-12 md:mb-18">
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+          <p
             className="text-zinc-500 lowercase tracking-[0.2em] md:tracking-[0.3em] text-[10px] md:text-xs mb-4"
           >
             insights & information
-          </motion.p>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
+          </p>
+          <h2
             className="text-4xl md:text-6xl font-light lowercase tracking-tighter"
           >
             frequently asked questions
-          </motion.h2>
+          </h2>
         </div>
 
         {/* FAQs List */}
         <div className="flex flex-col border-t border-white/10">
-          {faqData.map((faq, index) => {
+          {faqData.map((faq) => {
             const isActive = activeId === faq.id;
 
             return (
-              <motion.div
+              <div
                 key={faq.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.05 }}
                 className="border-b border-white/10"
               >
                 <button
@@ -136,7 +125,7 @@ const FaqSection = () => {
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </motion.div>
+              </div>
             );
           })}
         </div>

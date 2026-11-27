@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { buildSystemPrompt } from './websiteKnowledge';
 import { projectsData } from '../ProjectSection/projectsData';
+import { useTheme } from '../ThemeContext';
 import { Linkedin, Youtube, Instagram, Facebook, Phone, Mail, MapPin } from"lucide-react";
 
 const STORAGE_KEY = 'essentia_chat_session';
@@ -137,7 +138,7 @@ const ProjectCard = ({ slug, onNavigate }) => {
  return (
  <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}
  onClick={() => onNavigate(`/projects/${slug}`)}
- className="bg-[#111111]/90 backdrop-blur-md rounded-xl overflow-hidden border border-white/10 w-full h-full shadow-xl font-lato cursor-pointer group flex flex-col justify-between hover:border-white/40 transition-colors">
+ className="ee-chat-card bg-[#111111]/90 backdrop-blur-md rounded-xl overflow-hidden border border-white/10 w-full h-full shadow-xl font-lato cursor-pointer group flex flex-col justify-between hover:border-white/40 transition-colors">
  <div className="h-[120px] shrink-0 overflow-hidden relative">
  <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
@@ -169,7 +170,7 @@ const ServiceCard = ({ type }) => {
  return (
  <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}
  onClick={() => { window.location.href = service.link; }}
- className="bg-[#111111]/90 backdrop-blur-md rounded-xl overflow-hidden border border-white/10 w-full h-full shadow-xl font-lato cursor-pointer group flex flex-col justify-between hover:border-white/40 transition-colors">
+ className="ee-chat-card bg-[#111111]/90 backdrop-blur-md rounded-xl overflow-hidden border border-white/10 w-full h-full shadow-xl font-lato cursor-pointer group flex flex-col justify-between hover:border-white/40 transition-colors">
  <div className="h-[120px] shrink-0 overflow-hidden relative">
  <img src={service.img} alt={service.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
@@ -189,7 +190,7 @@ const ServiceCard = ({ type }) => {
 
 const ContactCard = () => (
  <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}
- className="bg-[#111111]/90 backdrop-blur-md rounded-xl border border-white/10 p-4 w-[260px] shadow-xl font-lato space-y-4">
+ className="ee-chat-card bg-[#111111]/90 backdrop-blur-md rounded-xl border border-white/10 p-4 w-[260px] shadow-xl font-lato space-y-4">
  <h4 className="text-white text-[13px] font-semibold tracking-wide lowercase border-b border-white/10 pb-2">contact details</h4>
  <div className="space-y-3.5">
  <div className="flex items-center gap-3">
@@ -222,7 +223,7 @@ const FormConfirmCard = ({ data, onConfirm, onCancel, handled }) => (
  <motion.div
  initial={{ opacity: 0, y: 10 }}
  animate={{ opacity: 1, y: 0 }}
- className="bg-[#111111]/90 backdrop-blur-md rounded-xl border border-white/10 p-4 w-full max-w-[300px] shadow-xl font-lato space-y-3">
+ className="ee-chat-card bg-[#111111]/90 backdrop-blur-md rounded-xl border border-white/10 p-4 w-full max-w-[300px] shadow-xl font-lato space-y-3">
  <div className="flex items-center gap-2 border-b border-white/10 pb-2.5">
  <span className="w-1.5 h-1.5 rounded-full bg-zinc-400 inline-block" />
  <h4 className="text-white text-[12px] font-semibold tracking-wide lowercase">form ready to submit</h4>
@@ -239,7 +240,7 @@ const FormConfirmCard = ({ data, onConfirm, onCancel, handled }) => (
  {!handled ? (
  <div className="flex gap-2 pt-0.5">
  <button onClick={onConfirm}
- className="flex-1 text-[11px] bg-white text-black py-2 rounded-lg font-semibold hover:bg-zinc-200 transition-colors lowercase tracking-wide">
+ className="ee-chat-send flex-1 text-[11px] bg-white text-black py-2 rounded-lg font-semibold hover:bg-zinc-200 transition-colors lowercase tracking-wide">
  yes, submit
  </button>
  <button onClick={onCancel}
@@ -265,6 +266,7 @@ const CONFIRM_SUGGESTIONS = [
 ];
 
 const ChatbotWidget = () => {
+ const { theme } = useTheme();
  const [isOpen, setIsOpen] = useState(false);
  const [messages, setMessages] = useState(loadHistory);
  const [input, setInput] = useState('');
@@ -392,7 +394,7 @@ const ChatbotWidget = () => {
  const waLink =`https://wa.me/${WHATSAPP_NUMBER}?text=${waMessage}`;
 
  return (
- <div className="fixed bottom-6 right-6 z-[100] font-lato">
+ <div className="ee-chat fixed bottom-6 right-6 z-[100] font-lato" data-theme={theme}>
  <AnimatePresence>
  {isOpen && (
  <motion.div
@@ -400,7 +402,7 @@ const ChatbotWidget = () => {
  animate={{ opacity: 1, y: 0, scale: 1 }}
  exit={{ opacity: 0, y: 30, scale: 0.95 }}
  transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
- className="absolute bottom-[76px] right-0 w-[90vw] max-w-[400px] bg-black/80 backdrop-blur-xl border border-white/10 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.9)] flex flex-col overflow-hidden"
+ className="ee-chat-panel absolute bottom-[76px] right-0 w-[90vw] max-w-[400px] bg-black/80 backdrop-blur-xl border border-white/10 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.9)] flex flex-col overflow-hidden"
  style={{ maxHeight: 'calc(100vh - 120px)', height: '620px' }}
  >
  {/* Header */}
@@ -427,7 +429,7 @@ const ChatbotWidget = () => {
 
  {/* Messages Container */}
  <div ref={messagesContainerRef}
- className="flex-1 min-h-0 overflow-y-auto p-4 space-y-4 chat-scroll bg-gradient-to-b from-transparent to-black/30 w-full"
+ className="ee-chat-messages flex-1 min-h-0 overflow-y-auto p-4 space-y-4 chat-scroll bg-gradient-to-b from-transparent to-black/30 w-full"
  style={{ overscrollBehavior: 'contain' }}
  onWheel={(e) => e.stopPropagation()}>
 
@@ -482,8 +484,8 @@ const ChatbotWidget = () => {
  className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
  <div className={`max-w-[85%] px-4 py-3 rounded-2xl text-[13px] leading-relaxed whitespace-pre-wrap shadow-md lowercase ${
  msg.role === 'user'
- ? 'bg-white text-black rounded-tr-none font-normal'
- : 'bg-white/[0.04] border border-white/10 text-zinc-200 rounded-tl-none font-light'
+ ? 'user-bubble bg-white text-black rounded-tr-none font-normal'
+ : 'bot-bubble bg-white/[0.04] border border-white/10 text-zinc-200 rounded-tl-none font-light'
  }`}>
  {msg.role === 'bot' ? <MessageContent text={msg.content} /> : msg.content}
  </div>
@@ -493,7 +495,7 @@ const ChatbotWidget = () => {
 
  {isLoading && (
  <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="flex justify-start">
- <div className="bg-white/[0.04] border border-white/10 px-4 py-3 rounded-2xl rounded-tl-none flex gap-1.5 items-center">
+ <div className="bot-bubble bg-white/[0.04] border border-white/10 px-4 py-3 rounded-2xl rounded-tl-none flex gap-1.5 items-center">
  {[0, 0.15, 0.3].map((delay, i) => (
  <motion.span key={i} className="w-1.5 h-1.5 bg-zinc-400 rounded-full"
  animate={{ y: [0, -5, 0] }} transition={{ duration: 0.6, repeat: Infinity, delay }} />
@@ -512,10 +514,10 @@ const ChatbotWidget = () => {
  initial={{ opacity: 0, height: 0 }}
  animate={{ opacity: 1, height: 'auto' }}
  exit={{ opacity: 0, height: 0 }}
- className="px-4 pb-3 pt-2.5 flex flex-wrap gap-2 flex-shrink-0 border-t border-white/5 bg-black/20 lowercase">
+ className="ee-chat-suggest px-4 pb-3 pt-2.5 flex flex-wrap gap-2 flex-shrink-0 border-t border-white/5 bg-black/20 lowercase">
  {currentSuggestions.map((s) => (
  <button key={s} onClick={() => handleSuggestionClick(s)}
- className={`text-[11px] border rounded-full px-3.5 py-1.5 transition-all bg-white/[0.02] tracking-wide font-light lowercase ${
+ className={`ee-chat-chip text-[11px] border rounded-full px-3.5 py-1.5 transition-all bg-white/[0.02] tracking-wide font-light lowercase ${
  awaitingSubmitConfirm && s === 'yes, submit it'
  ? 'text-white border-white/40 hover:bg-white/10'
  : 'text-zinc-400 border-white/10 hover:border-white hover:text-white'
@@ -528,13 +530,13 @@ const ChatbotWidget = () => {
  </AnimatePresence>
 
  {/* Input Bar */}
- <form onSubmit={handleSubmit} className="px-4 pt-3 pb-2.5 bg-black/60 border-t border-white/10 flex gap-2.5 flex-shrink-0">
+ <form onSubmit={handleSubmit} className="ee-chat-bar px-4 pt-3 pb-2.5 bg-black/60 border-t border-white/10 flex gap-2.5 flex-shrink-0">
  <input ref={inputRef} type="text" value={input} onChange={(e) => setInput(e.target.value)}
  placeholder={awaitingSubmitConfirm ?"type yes to submit or no to cancel..." :"ask anything or describe your project..."}
  disabled={isLoading}
- className="flex-1 bg-white/[0.03] border border-white/10 text-white text-[13px] px-4 py-3 rounded-xl focus:outline-none focus:border-white/30 transition-colors placeholder:text-zinc-500 disabled:opacity-50 font-light lowercase" />
+ className="ee-chat-input flex-1 bg-white/[0.03] border border-white/10 text-white text-[13px] px-4 py-3 rounded-xl focus:outline-none focus:border-white/30 transition-colors placeholder:text-zinc-500 disabled:opacity-50 font-light lowercase" />
  <button type="submit" disabled={isLoading || !input.trim()}
- className="bg-white text-black px-4 py-3 rounded-xl text-sm font-medium hover:bg-zinc-200 transition-colors flex-shrink-0 shadow-lg disabled:opacity-40">
+ className="ee-chat-send bg-white text-black px-4 py-3 rounded-xl text-sm font-medium hover:bg-zinc-200 transition-colors flex-shrink-0 shadow-lg disabled:opacity-40">
  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
  </svg>
@@ -542,7 +544,7 @@ const ChatbotWidget = () => {
  </form>
 
  {/* Powered by */}
- <div className="bg-black/60 pb-3 flex justify-center flex-shrink-0">
+ <div className="ee-chat-bar bg-black/60 pb-3 flex justify-center flex-shrink-0">
  <p className="text-[10px] text-zinc-500 tracking-widest lowercase font-light">
  powered by groq
  </p>

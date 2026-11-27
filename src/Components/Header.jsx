@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, ChevronRight } from 'lucide-react'; // ChevronRight add kiya nested arrow ke liye
+import { ChevronDown, ChevronRight, Moon, Sun } from 'lucide-react';
+import { useTheme } from './ThemeContext';
 
 const Header = () => {
   const location = useLocation();
@@ -17,6 +18,8 @@ const Header = () => {
   const [visible, setVisible] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
   const lastScrollY = useRef(0);
+  const { theme, toggleTheme } = useTheme();
+  const logoSrc = theme === 'light' ? '/black-logo.png' : '/essentia R W.webp';
 
   // Desktop dropdown ko band karein jab bahar tap/click ho
   useEffect(() => {
@@ -167,14 +170,14 @@ const Header = () => {
         className="w-full h-25 flex items-center relative"
       >
         {/* Blur overlay as a sibling — not ancestor — of dropdowns, so their backdrop-blur works independently */}
-        <div className={`absolute inset-0 pointer-events-none transition-all duration-500 ${isScrolled ? 'bg-white/5 backdrop-blur-lg' : 'bg-gradient-to-b from-black/40 via-black/30 to-transparent'}`} />
+        <div className={`absolute inset-0 pointer-events-none ${theme === 'light' ? 'bg-[#f6f4f1]' : 'bg-black/80 backdrop-blur-md'}`} />
 
         <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-10 flex justify-between items-center">
 
           {/* Logo Section */}
           <motion.div variants={itemVariants} className="flex-shrink-0">
             <Link to="/" className="text-white text-3xl md:text-4xl font-extralight tracking-tighter hover:opacity-90 transition-opacity">
-              <img src="/essentia R W.webp" alt="Essentia Logo" className='w-45 md:w-50' />
+              <img src={logoSrc} alt="Essentia Logo" className='w-45 md:w-50' />
             </Link>
           </motion.div>
 
@@ -320,6 +323,17 @@ const Header = () => {
             </ul>
           </nav>
 
+          {/* Theme and menu */}
+          <div className="flex items-center gap-1">
+            <button
+              type="button"
+              onClick={toggleTheme}
+              aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+              className="flex items-center justify-center w-10 h-10 text-white"
+            >
+              {theme === 'light' ? <Moon size={18} strokeWidth={1.5} /> : <Sun size={18} strokeWidth={1.5} />}
+            </button>
+
           {/* Hamburger Icon (Mobile) */}
           <motion.div
             variants={itemVariants}
@@ -332,6 +346,7 @@ const Header = () => {
               <span className={`w-full h-[1px] bg-white transition-all duration-500 ${isOpen ? '-rotate-45 -translate-y-2' : ''}`} />
             </div>
           </motion.div>
+          </div>
         </div>
       </motion.header>
       </motion.div>

@@ -76,29 +76,21 @@ const MeetFounders = () => {
  const member = founders[current];
 
  return (
- <section className="bg-black text-white pb-10 pt-8 overflow-hidden">
+ <section className="bg-black text-white pb-10 pt-8 overflow-clip">
  <div className="max-w-[1400px] mx-auto">
 
  {/* HEADER */}
  <div className="flex flex-col md:flex-row justify-center md:justify-between gap-6 md:gap-10 mb-8 md:mb-10 px-6 md:px-16">
- <motion.h2
- initial={{ opacity: 0, y: 40 }}
- whileInView={{ opacity: 1, y: 0 }}
- viewport={{ once: true }}
- transition={{ duration: 0.8 }}
+ <h2
  className="text-3xl md:text-5xl text-center font-light max-w-2xl lowercase"
  >
  Meet the Principals
- </motion.h2>
- <motion.p
- initial={{ opacity: 0, y: 40 }}
- whileInView={{ opacity: 1, y: 0 }}
- viewport={{ once: true }}
- transition={{ delay: 0.15, duration: 0.8 }}
+ </h2>
+ <p
  className="text-gray-300 max-w-md text-center hidden md:block md:text-right text-sm md:text-lg font-light lowercase"
  >
  The visionaries behind essentia environments
- </motion.p>
+ </p>
  </div>
 
  {/* <div className="flex items-center justify-center mb-8 -mt-5 md:my-16 px-6 md:px-16 lg:px-24">
@@ -122,7 +114,7 @@ const MeetFounders = () => {
  </button>
 
  {/* SLIDE WRAPPER */}
- <div className="w-full overflow-hidden px-6 md:px-14 lg:px-18 py-2">
+ <div className="w-full overflow-clip px-6 md:px-14 lg:px-18 py-2">
  <AnimatePresence custom={direction} mode="wait">
  <motion.div
  key={current}
@@ -131,11 +123,13 @@ const MeetFounders = () => {
  initial="enter"
  animate="center"
  exit="exit"
- transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+ transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
  drag="x"
+ dragDirectionLock
  dragConstraints={{ left: 0, right: 0 }}
- dragElastic={0.2}
+ dragElastic={0.12}
  onDragEnd={handleDragEnd}
+ style={{ touchAction: "pan-y" }}
  className="flex flex-col md:flex-row items-stretch h-auto md:h-[540px] cursor-grab active:cursor-grabbing"
  >
  {/* LEFT — IMAGE */}

@@ -72,7 +72,7 @@ const ProCard = () => {
 
  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/50 transition-all duration-500" />
 
- <div className="absolute inset-0 flex flex-col items-center justify-center p-8">
+ <div className="on-dark absolute inset-0 flex flex-col items-center justify-center p-8">
  <h3 className="text-white text-[28px] md:text-5xl font-light lowercase text-center transition-transform duration-700 group-hover:-translate-y-6">
  {project.title}
  </h3>

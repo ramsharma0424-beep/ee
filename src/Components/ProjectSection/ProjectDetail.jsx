@@ -19,6 +19,10 @@ const ProjectDetail = () => {
  'mgp-office', 'navraj-office-gurgaon', 'reach-office', 'schueco-office',
  'aralias-residence', 'camelias-residence-1', 'camelias-residence-2', 'camelias-residence-3',
  'new-delhi-farmhouse', 'jaipur-residence','aryan-realty',
+ 'chennai-residence', 'defence-colony-residence', 'faridabad-residence', 'goa-residence',
+ 'gurgaon-magnolias', 'gurgaon-magnolias-02', 'ludhiana-commercial', 'maharani-bagh-residence',
+ 'mumbai-apartment', 'mumbai-apartment-02', 'raipur-residence', 'raipur-residence-02',
+ 'raipur-residence-03', 'raipur-residence-04', 'moradabad-residence-01',
  ];
  const showDetails = !hideDetailsFor.includes(project?.slug);
 

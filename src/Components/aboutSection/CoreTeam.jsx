@@ -68,7 +68,7 @@
 // <img
 // src={member.img}
 // alt={member.name.replace('\n', ' ')}
-// className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+// className="w-full h-full object-cover object-top"
 // />
 // {/* Overlay Gradient for better text readability */}
 // <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
@@ -94,7 +94,7 @@
 // <img
 // src={member.img}
 // alt={member.name.replace('\n', ' ')}
-// className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" 
+// className="w-full h-full object-cover object-top" 
 // />
 // {/* Overlay Gradient */}
 // <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
@@ -117,6 +117,7 @@
 
 
 import React, { useState } from"react";
+import { useTheme } from "../ThemeContext";
 
 // Top row array (6 members)
 const topRowData = [
@@ -232,27 +233,26 @@ const bottomRowData = [
 ];
 
 const CoreTeam = () => {
- // State to handle the selected member for the mobile popup
+ const { theme } = useTheme();
  const [selectedMember, setSelectedMember] = useState(null);
 
  // Close popup function
  const closePopup = () => setSelectedMember(null);
 
  return (
- <section className="w-full bg-[#111] text-white overflow-hidden my-8 md:my-12">
+ <section className="w-full bg-[#111] text-white overflow-clip my-8 md:my-12">
  
  {/* --- HEADER SECTION ABOVE IMAGES --- */}
- <div className="w-full bg-black text-white px-6 md:px-16 pb-10 md:pb-20 relative overflow-hidden">
+ <div className="w-full bg-black text-white px-6 md:px-16 pb-10 md:pb-20 relative overflow-clip">
  <div className="max-w-[1400px] mx-auto">
  
  <div className="flex flex-col max-w-xl">
  {/*"core" and Horizontal Line */}
- <div className="flex items-center w-full relative">
- <h2 className="text-5xl md:text-7xl font-light tracking-tight lowercase">
+ <div className="flex items-center w-full gap-4 overflow-clip">
+ <h2 className="text-5xl md:text-7xl font-light tracking-tight lowercase shrink-0">
  core
  </h2>
- {/* Responsive left positioning for the line */}
- <div className="h-[1px] bg-white flex-grow ml-0 mt-6 md:mt-12 w-[200vw] absolute left-[105px] md:left-[190px] lg:left-[150px]"></div>
+ <div className="h-px flex-1 bg-current opacity-30"></div>
  </div>
  
  {/*"team essentia" with Logo */}
@@ -261,7 +261,7 @@ const CoreTeam = () => {
  team
  </span>
  <img 
- src="/essentia R W.webp" 
+ src={theme === "light" ? "/black-logo.png" : "/essentia R W.webp"} 
  alt="essentia logo" 
  className="h-5 md:h-7 object-contain" 
  />
@@ -277,12 +277,12 @@ const CoreTeam = () => {
  <div 
  key={member.id} 
  onClick={() => setSelectedMember(member)}
- className="relative md:flex-1 h-[250px] sm:h-[300px] md:h-[350px] group overflow-hidden border-b md:border-b-0 border-r border-black/20 cursor-pointer md:cursor-default"
+ className="relative md:flex-1 h-[250px] sm:h-[300px] md:h-[350px] group overflow-clip border-b md:border-b-0 border-r border-black/20 cursor-pointer md:cursor-default"
  >
  <img
  src={member.img}
  alt={member.name.replace('\n', ' ')}
- className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+ className="w-full h-full object-cover object-top"
  />
  
  {/* Base Overlay Gradient */}
@@ -301,7 +301,7 @@ const CoreTeam = () => {
  </div>
  
  {/* Name Text (Fades out on hover) */}
- <div className="absolute bottom-4 left-4 md:bottom-6 md:left-6 z-20 pointer-events-none transition-opacity duration-500 group-hover:opacity-0">
+ <div className="on-dark absolute bottom-4 left-4 md:bottom-6 md:left-6 z-20 pointer-events-none transition-opacity duration-500 group-hover:opacity-0">
  <p className="text-white text-[13px] md:text-[16px] font-light lowercase whitespace-pre-wrap leading-tight drop-shadow-md">
  {member.name}
  </p>
@@ -316,12 +316,12 @@ const CoreTeam = () => {
  <div 
  key={member.id} 
  onClick={() => setSelectedMember(member)}
- className="relative md:flex-1 h-[180px] sm:h-[220px] md:h-[250px] group overflow-hidden border-b md:border-b-0 border-r border-black/20 cursor-pointer md:cursor-default"
+ className="relative md:flex-1 h-[180px] sm:h-[220px] md:h-[250px] group overflow-clip border-b md:border-b-0 border-r border-black/20 cursor-pointer md:cursor-default"
  >
  <img
  src={member.img}
  alt={member.name.replace('\n', ' ')}
- className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" 
+ className="w-full h-full object-cover object-top" 
  />
  
  {/* Base Overlay Gradient */}
@@ -340,7 +340,7 @@ const CoreTeam = () => {
  </div>
  
  {/* Name Text (Fades out on hover) */}
- <div className="absolute bottom-3 left-3 md:bottom-4 md:left-4 z-20 pointer-events-none transition-opacity duration-500 group-hover:opacity-0">
+ <div className="on-dark absolute bottom-3 left-3 md:bottom-4 md:left-4 z-20 pointer-events-none transition-opacity duration-500 group-hover:opacity-0">
  <p className="text-white text-[10px] sm:text-[11px] md:text-[14px] font-light lowercase whitespace-pre-wrap leading-tight drop-shadow-md">
  {member.name}
  </p>

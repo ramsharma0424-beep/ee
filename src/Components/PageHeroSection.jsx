@@ -14,7 +14,7 @@ const PageHeroSection = ({
  clastyle ="",
 }) => {
  return (
- <section className="relative w-full h-[85vh] md:h-[90vh] overflow-hidden bg-black font-lato">
+ <section className="on-dark relative w-full h-[85vh] md:h-[90vh] overflow-hidden bg-black font-lato">
 
  {/* ✅ Optimized Background Image (same animation) */}
  <motion.img
